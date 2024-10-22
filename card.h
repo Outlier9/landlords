@@ -10,7 +10,7 @@ public:
     //花色
     enum CardSuit
     {
-        Suit_begin,
+        Suit_Begin,
         Diamond, //方块（♦）
         Club, //梅花（♣）
         Heart, //红桃（♥）
@@ -41,6 +41,7 @@ public:
     };
 
     Card();
+    Card(CardPoint point,CardSuit suit);
 
     void setPoint(CardPoint point);
     void setSuit(CardSuit suit);
