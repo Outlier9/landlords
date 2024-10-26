@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Gamepanel</class>
- <widget class="QMainWindow" name="Gamepanel">
+ <class>GamePanel</class>
+ <widget class="QMainWindow" name="GamePanel">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>543</width>
-    <height>376</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Gamepanel</string>
+   <string>GamePanel</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -25,7 +25,7 @@
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>502</width>
+           <width>736</width>
            <height>20</height>
           </size>
          </property>
@@ -50,6 +50,25 @@
       </property>
      </spacer>
     </item>
+    <item>
+     <widget class="ButtonGroup" name="btnGroup" native="true"/>
+    </item>
+    <item>
+     <spacer name="verticalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -57,8 +76,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>543</width>
-     <height>18</height>
+     <width>800</width>
+     <height>26</height>
     </rect>
    </property>
   </widget>
@@ -69,6 +88,12 @@
    <class>ScorePanel</class>
    <extends>QWidget</extends>
    <header>scorepanel.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ButtonGroup</class>
+   <extends>QWidget</extends>
+   <header>buttongroup.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

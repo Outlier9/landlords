@@ -8,6 +8,7 @@ Player::Player(QObject *parent)
 
 Player::Player(QString name, QObject *parent)
 {
+    Q_UNUSED(parent);
     m_name = name;
     m_score = 0; // 或其他初始化逻辑
     m_role = Farmer; // 默认角色
@@ -111,7 +112,7 @@ Player *Player::getNextPlayer()
 
 void Player::grablordBet(int point)
 {
-
+    Q_UNUSED(point);
 }
 
 void Player::storeDispatchCard(Card &card)

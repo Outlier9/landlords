@@ -66,6 +66,7 @@ Player *CardPanel::getOwner()
 
 void CardPanel::paintEvent(QPaintEvent *event)
 {
+    Q_UNUSED(event);
     QPainter p(this);
     if(m_isfront)
     {
@@ -79,5 +80,5 @@ void CardPanel::paintEvent(QPaintEvent *event)
 
 void CardPanel::mousePressEvent(QMouseEvent *event)
 {
-
+    Q_UNUSED(event);
 }

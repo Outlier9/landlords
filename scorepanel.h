@@ -4,19 +4,21 @@
 #include <QWidget>
 
 namespace Ui {
-class scorepanel;
+class ScorePanel;
 }
 
-class scorepanel : public QWidget
+class ScorePanel : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit scorepanel(QWidget *parent = nullptr);
-    ~scorepanel();
+    explicit ScorePanel(QWidget *parent = nullptr);
+    ~ScorePanel();
+
 
 private:
-    Ui::scorepanel *ui;
+    Ui::ScorePanel *ui;
+
 };
 
 #endif // SCOREPANEL_H

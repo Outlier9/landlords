@@ -5,19 +5,23 @@
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
-class Gamepanel;
+class GamePanel;
 }
 QT_END_NAMESPACE
 
-class Gamepanel : public QMainWindow
+class GamePanel : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    Gamepanel(QWidget *parent = nullptr);
-    ~Gamepanel();
+    GamePanel(QWidget *parent = nullptr);
+    ~GamePanel();
+
+protected:
+    void paintEvent(QPaintEvent* ev);
 
 private:
-    Ui::Gamepanel *ui;
+    Ui::GamePanel *ui;
+    QPixmap* m_bkImage;
 };
 #endif // GAMEPANEL_H
