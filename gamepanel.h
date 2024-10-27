@@ -5,6 +5,7 @@
 #include<gamecontrol.h>
 #include<cardpanel.h>
 #include<QLabel>
+#include<QMap>
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class GamePanel;
@@ -31,6 +32,9 @@ public:
     void initButtonsGroup();
     //初始化玩家在窗口中的上下文环境
     void initPlayerContext();
+
+    //游戏开始场景初始化
+    void initGameScene();
 
 protected:
     void paintEvent(QPaintEvent* ev);
@@ -62,5 +66,13 @@ private:
     QMap<Card,CardPanel*> m_cardMap;
     QSize m_cardSize;
     QPixmap m_cardBackImg;
+    QMap<Player*, PlayerContext> m_contextMap;
+    //发牌区扑克牌
+    CardPanel* m_baseCard;
+    //发牌时的移动扑克牌
+    CardPanel* m_moveCard;
+    //最后三张牌
+    QVector<CardPanel*> m_last3Cards;
+    QPoint m_baseCardPos;
 };
 #endif // GAMEPANEL_H

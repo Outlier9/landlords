@@ -29,6 +29,8 @@ GamePanel::GamePanel(QWidget *parent)
     initButtonsGroup();
     //7.初始化玩家在窗口中的上下文环境
     initPlayerContext();
+    //8.扑克牌场景初始化
+    initGameScene();
 }
 
 GamePanel::~GamePanel()
@@ -92,7 +94,7 @@ void GamePanel::cropImage(QPixmap &pix, int x, int y,Card& c)
     panel->setImage(sub,m_cardBackImg);
     panel->setCard(c);
     panel->hide();
-    m_cardMap.insert(c,panel);
+    m_cardMap.insert(c, panel);
 }
 
 void GamePanel::initButtonsGroup()
@@ -137,8 +139,12 @@ void GamePanel::initPlayerContext()
     for(int i = 0;i<m_playerList.size();++i)
     {
         PlayerContext context;
+        //若是当前玩家则设置为水平显示 Horizontal，否则为垂直显示 Vertical
         context.align = i==index ? Horizontal : Vertical;
+        //如果是当前玩家，显示牌的正面；否则，显示牌的背面
         context.isFrontSide = i==index ? true: false;
+        //cardsRect[i] 和 playHandRect[i] 提供了每个玩家的扑克牌区域和出牌区域的坐标和尺寸
+        //将这些区域赋值给 context 对象，以便后续绘制
         context.cardRect = cardsRect[i];
         context.playHandRect = playHandRect[i];
         //提示信息
@@ -155,7 +161,33 @@ void GamePanel::initPlayerContext()
         context.roleImg->resize(84,120);
         context.roleImg->hide();
         context.roleImg->move(roleImgPos[i]);
-        // m_contextMap.insert(m_playerList.at(i),context);
+        //将每个玩家对象和相应的 PlayerContext 映射起来
+        m_contextMap.insert(m_playerList.at(i),context);
+    }
+}
+
+void GamePanel::initGameScene()
+{
+    //1.发牌区的扑克牌
+    m_baseCard = new CardPanel(this);
+    //2.发牌过程中的移动的扑克牌
+    m_moveCard = new CardPanel(this);
+    //3.最后的三张底牌（用于窗口的显示）
+    for(int i = 0;i<3;++i)
+    {
+        CardPanel* panel = new CardPanel(this);
+        m_last3Cards.push_back(panel);
+    }
+    //扑克牌的位置
+    m_baseCardPos = QPoint((width() - m_cardSize.width()) / 2,
+                           (height() - m_cardSize.height()) / 2 - 100);
+    m_baseCard->move(m_baseCardPos);
+    m_moveCard->move(m_baseCardPos);
+
+    int base = (width() - 3 * m_cardSize.width() - 2 * 10) / 2;
+    for(int i = 0;i<3;++i)
+    {
+        m_last3Cards[i]->move(base+(m_cardSize.width()+10) * i,20);
     }
 }
 
