@@ -61,7 +61,7 @@ public:
     //成为地主
     void becomeLord(Player* player);
     //清空分数
-    void clearPlayScore();
+    void clearPlayerScore();
 
     //处理叫地主
 

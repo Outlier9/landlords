@@ -32,9 +32,16 @@ public:
     void initButtonsGroup();
     //初始化玩家在窗口中的上下文环境
     void initPlayerContext();
-
     //游戏开始场景初始化
     void initGameScene();
+    //处理游戏状态
+    void gameStatusPrecess(GameControl::GameStatus status);
+    //发牌
+    void startDispatchCard();
+    //定时器的处理动作
+    void onDispatchCard();
+    //移动扑克牌
+    void cardMoveStep(Player* player, int curPos);
 
 protected:
     void paintEvent(QPaintEvent* ev);
@@ -60,7 +67,7 @@ private:
     };
 
     Ui::GamePanel *ui;
-    QPixmap* m_bkImage;
+    QPixmap m_bkImage;
     GameControl* m_gameCtl;
     QVector<Player*> m_playerList;
     QMap<Card,CardPanel*> m_cardMap;
@@ -74,5 +81,7 @@ private:
     //最后三张牌
     QVector<CardPanel*> m_last3Cards;
     QPoint m_baseCardPos;
+    GameControl::GameStatus m_GameStatus;
+    QTimer* m_timer;
 };
 #endif // GAMEPANEL_H

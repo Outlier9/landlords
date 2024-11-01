@@ -3,21 +3,13 @@
 Player::Player(QObject *parent)
     : QObject{parent}
 {
-
+    m_score = 0;
+    m_isWin = false;
 }
 
-Player::Player(QString name, QObject *parent)
+Player::Player(QString name, QObject *parent) : Player(parent)
 {
-    Q_UNUSED(parent);
     m_name = name;
-    m_score = 0; // 或其他初始化逻辑
-    m_role = Farmer; // 默认角色
-    m_sex = Man; // 默认性别
-    m_direction = Left; // 默认方向
-    m_type = User; // 默认类型
-    m_isWin = false; // 默认状态
-    m_prev = nullptr; // 初始化上家
-    m_next = nullptr; // 初始化下家
 }
 
 void Player::setName(QString name)

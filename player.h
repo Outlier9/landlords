@@ -14,6 +14,7 @@ public:
     explicit Player(QObject *parent = nullptr);
     explicit Player(QString name,QObject *parent = nullptr);
 
+
     //名字
     void setName(QString name);
     QString getNmae();
