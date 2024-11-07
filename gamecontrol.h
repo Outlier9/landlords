@@ -6,6 +6,29 @@
 #include"userplayer.h"
 #include"cards.h"
 
+//记录玩家下注信息
+struct BetRecord
+{
+    //构造
+    BetRecord()
+    {
+        reset();
+    }
+    //公共成员函数进行初始化
+    void reset()
+    {
+        player = nullptr;
+        bet = 0;
+        times = 0;
+    }
+
+    Player* player;
+    int bet;
+    //记录第几次叫地主
+    int times;
+};
+
+
 class GameControl : public QObject
 {
     Q_OBJECT
@@ -13,8 +36,11 @@ public:
     //游戏状态
     enum GameStatus
     {
+        //发牌
         DispatchCard,
+        //叫地主
         Callinglord,
+        //出牌
         PlayingHand
     };
     //玩家状态
@@ -31,7 +57,7 @@ public:
     void playerInit();
 
     //得到玩家的实例对象
-    Robot* getLeftRoboxt();
+    Robot* getLeftRobot();
     Robot* getRightRobot();
     UserPlayer* getUserPlayer();
 
@@ -62,16 +88,22 @@ public:
     void becomeLord(Player* player);
     //清空分数
     void clearPlayerScore();
+    //得到玩家下注的最高分数
+    int getPlayerMaxBet();
 
     //处理叫地主
-
+    void onGrabBet(Player* player,int bet);
     //处理出牌
 
 
 
 
 signals:
-
+    void playerStatusChanged(Player* player,PlayerStatus status);
+    //通知玩家抢地主
+    void notifyGrabLordBet(Player* player,int bet,bool flag);
+    //游戏状态变化
+    void gameStatusChanged(GameStatus status);
 
 private:
     Robot* m_robotLeft;
@@ -84,6 +116,7 @@ private:
     Cards m_pendCards;
     //扑克牌
     Cards m_allCards;
+    BetRecord m_betRecord;
 
 };
 

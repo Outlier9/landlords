@@ -104,7 +104,7 @@ Player *Player::getNextPlayer()
 
 void Player::grablordBet(int point)
 {
-    Q_UNUSED(point);
+    emit notifyGrabLordBet(this,point);
 }
 
 void Player::storeDispatchCard(Card &card)

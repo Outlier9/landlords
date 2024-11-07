@@ -44,9 +44,9 @@ void ButtonGroup::initButtons()
     connect(ui->playcard1,&MyButton::clicked,this,&ButtonGroup::playHand);
     connect(ui->pass,&MyButton::clicked,this,&ButtonGroup::pass);
     connect(ui->giveup,&MyButton::clicked,this,[=]()
-    {
-        emit betPoint(0);
-    });
+            {
+                emit betPoint(0);
+            });
     connect(ui->oneScore,&MyButton::clicked,this,[=]()
             {
                 emit betPoint(1);
@@ -61,7 +61,30 @@ void ButtonGroup::initButtons()
             });
 }
 
-void ButtonGroup::selectPanel(Panel type)
+void ButtonGroup::selectPanel(Panel type, int bet)
 {
     ui->stackedWidget->setCurrentIndex(type);
+    if(type != CallLord)
+    {
+        return;
+    }
+    if(bet == 0)
+    {
+        ui->oneScore->setVisible(true);
+        ui->twoScore->setVisible(true);
+        ui->threeScore->setVisible(true);
+    }
+    else if(bet == 1)
+    {
+        ui->oneScore->setVisible(false);
+        ui->twoScore->setVisible(true);
+        ui->threeScore->setVisible(true);
+    }
+    else if(bet == 2)
+    {
+        ui->oneScore->setVisible(false);
+        ui->twoScore->setVisible(false);
+        ui->threeScore->setVisible(true);
+    }
 }
+

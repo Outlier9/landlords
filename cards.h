@@ -8,6 +8,7 @@ class Cards
 public:
     enum Sorttype{Asc,Desc,NoSort};
     Cards();
+    Cards(const Card &card);
     //添加扑克牌
     void add(const Card& card);
     void add(const Cards& cards);
