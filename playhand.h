@@ -41,18 +41,20 @@ public:
     PlayHand(Cards& cards);
     PlayHand(HandType type, Card::CardPoint pt, int extra);
 
-
-// private:
-    // 1. 对扑克牌进行分类: 1张, 2张, 3张, 4张有多少种
-    void classify(Cards& cards);
-
-    // 2. 对牌型进行分类
-    void judgeCardType();
-
     //得到牌的属性信息
     HandType getHandType();
     Card::CardPoint getCardPoint();
     int getExtra();
+
+    //比较自己的牌和其他人的牌的牌型大小
+    bool canBeat(const PlayHand& other);
+
+ private:
+    // 1. 对玩家拿到的扑克牌进行分类: 1张, 2张, 3张, 4张有多少种
+    void classify(Cards& cards);
+
+    // 2. 对牌型进行分类
+    void judgeCardType();
 
     // 判断牌的类型
     bool isPass();              // 放弃出牌
