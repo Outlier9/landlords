@@ -68,7 +68,7 @@ public:
     //设置出牌玩家以及待处理的扑克牌
     void setPendInfo(Player* player,Cards &cards);
     //抽象类，不能进行实例化
-    Player* getPendplayer();
+    Player* getPendPlayer();
     Cards getPendCards();
 
     //纯虚函数,用多态实现机器人和用户的不同处理方式

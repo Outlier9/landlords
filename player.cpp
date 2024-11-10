@@ -138,7 +138,7 @@ void Player::setPendInfo(Player* player, Cards &cards)
     m_pendCards = cards;
 }
 
-Player *Player::getPendplayer()
+Player *Player::getPendPlayer()
 {
     return m_pendPlayer;
 }
