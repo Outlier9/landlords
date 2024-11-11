@@ -1,5 +1,6 @@
 #include "strategy.h"
 #include<QMap>
+#include<functional>
 
 Strategy::Strategy(Player* player,const Cards& cards)
 {
@@ -265,7 +266,8 @@ Cards Strategy::getGreaterCards(PlayHand type)
     Cards remain = m_cards;
     remain.remove(Strategy(m_player, remain).pickOptimalSeqSingles());
 
-
+    //可调用对象绑定器（第一个参数是函数地址，对于匿名函数来说，函数地址就是它的函数体）
+    //复杂函数，使用auto识别函数类型
     auto beatCard = std::bind([=](const Cards & cards){
         QVector<Cards> beatCardsArray = Strategy(m_player, cards).findCardType(type, true);
         if(!beatCardsArray.isEmpty())

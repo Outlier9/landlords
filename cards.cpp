@@ -18,6 +18,13 @@ void Cards::add(const Cards &cards)
     m_cards.unite(cards.m_cards);
 }
 
+void Cards::add(const QVector<Cards> &cards)
+{
+    for (const Cards& card : cards) {
+        add(card);  // 调用已有的 add(const Cards&) 方法
+    }
+}
+
 Cards &Cards::operator <<(const Card &card)
 {
     add(card);
