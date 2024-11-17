@@ -667,7 +667,7 @@ QVector<Cards> Strategy::getSepPairOrSeqSingle(CardInfo &info)
     if(info.beat)
     {
         // 最少3个, 最大A
-        for(Card::CardPoint point = info.begin; point <= info.end; point = (Card::CardPoint)(point+1))
+        for(Card::CardPoint point = info.begin; point <= info.end && (point + info.extra <= Card::Card_A); point = (Card::CardPoint)(point+1))
         {
             bool found = true;
             Cards seqCards;

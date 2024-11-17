@@ -102,7 +102,7 @@ Player *Player::getNextPlayer()
     return m_next;
 }
 
-void Player::grablordBet(int point)
+void Player::grabLordBet(int point)
 {
     emit notifyGrabLordBet(this,point);
 }
@@ -157,3 +157,15 @@ void Player::preparePlayHand()
 {
     //实际处理逻辑在子类中实现
 }
+
+void Player::thinkCallLord()
+{
+
+}
+
+void Player::thinkPlayHand()
+{
+
+}
+
+

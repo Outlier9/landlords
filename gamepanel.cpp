@@ -132,7 +132,7 @@ void GamePanel::initButtonsGroup()
     //玩家下注
     connect(ui->btnGroup,&ButtonGroup::betPoint,this,[=](int bet)
     {
-        m_gameCtl->getUserPlayer()->grablordBet(bet);
+        m_gameCtl->getUserPlayer()->grabLordBet(bet);
     });
 }
 

@@ -50,7 +50,7 @@ public:
     Player* getNextPlayer();
 
     //叫地主/抢地主
-    void grablordBet(int point);
+    void grabLordBet(int point);
 
     //存储扑克牌（发牌的时候得到）
     void storeDispatchCard(Card& card);
@@ -74,6 +74,9 @@ public:
     //纯虚函数,用多态实现机器人和用户的不同处理方式
     virtual void prepareCallLord();
     virtual void preparePlayHand();
+
+    virtual void thinkCallLord();
+    virtual void thinkPlayHand();
 
 signals:
     //通知已经下注
