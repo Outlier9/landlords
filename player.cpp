@@ -17,7 +17,7 @@ void Player::setName(QString name)
     m_name = name;
 }
 
-QString Player::getNmae()
+QString Player::getName()
 {
     return m_name;
 }
@@ -110,11 +110,15 @@ void Player::grabLordBet(int point)
 void Player::storeDispatchCard(Card &card)
 {
     m_cards.add(card);
+    Cards cs;
+    cs.add(card);
+    emit notifyPickCards(this,cs);
 }
 
 void Player::storeDispatchCard(Cards &cards)
 {
     m_cards.add(cards);
+    emit notifyPickCards(this,cards);
 }
 
 Cards Player::getCards()
@@ -130,6 +134,8 @@ void Player::clearCards()
 void Player::playHand(Cards &cards)
 {
     m_cards.remove(cards);
+    emit notifyPlayHand(this,cards);
+
 }
 
 void Player::setPendInfo(Player* player, Cards &cards)
@@ -148,6 +154,12 @@ Cards Player::getPendCards()
     return m_pendCards;
 }
 
+void Player::storePendingInfo(Player *player, Cards &cards)
+{
+    m_pendPlayer = player;
+    m_pendCards = cards;
+}
+
 void Player::prepareCallLord()
 {
     //实际处理逻辑在子类中实现
@@ -160,12 +172,12 @@ void Player::preparePlayHand()
 
 void Player::thinkCallLord()
 {
-
+    //实际处理逻辑在子类中实现
 }
 
 void Player::thinkPlayHand()
 {
-
+    //实际处理逻辑在子类中实现
 }
 
 

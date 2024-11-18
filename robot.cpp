@@ -1,5 +1,5 @@
 #include "robot.h"
-// #include "robotplayhand.h"
+#include "robotplayhand.h"
 #include <QDebug>
 #include "robotgraplord.h"
 #include "strategy.h"
@@ -21,16 +21,16 @@ void Robot::prepareCallLord()
     subThread->start();
 }
 
-// void Robot::preparePlayHand()
-// {
-//     RobotPlayHand* subThread = new RobotPlayHand(this);
-//     connect(subThread, &RobotGrapLord::finished, this, [=](){
-//         qDebug() << "RobotPlayHand 子线程对象析构..." << ", Robot name: " << this->getName();
-//         subThread->deleteLater();
-//     });
+void Robot::preparePlayHand()
+{
+    Robotplayhand* subThread = new Robotplayhand(this);
+    // connect(subThread, &RobotGrapLord::finished, this, [=](){
+    //     qDebug() << "RobotPlayHand 子线程对象析构..." << ", Robot name: " << this->getName();
+    //     subThread->deleteLater();
+    // });
 
-//     subThread->start();
-// }
+    subThread->start();
+}
 
 
 void Robot::thinkCallLord()
@@ -87,9 +87,9 @@ void Robot::thinkCallLord()
 }
 
 
-// void Robot::thinkPlayHand()
-// {
-//     Strategy st(this, m_cards);
-//     Cards cs = st.makeStrategy();
-//     playHand(cs);
-// }
+void Robot::thinkPlayHand()
+{
+    Strategy st(this, m_cards);
+    Cards cs = st.makeStrategy();
+    playHand(cs);
+}

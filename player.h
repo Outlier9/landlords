@@ -17,7 +17,7 @@ public:
 
     //名字
     void setName(QString name);
-    QString getNmae();
+    QString getName();
 
     //角色
     void setRole(Role role);
@@ -71,6 +71,9 @@ public:
     Player* getPendPlayer();
     Cards getPendCards();
 
+    //存储出牌玩家对象及打出的牌
+    void storePendingInfo(Player* player, Cards& cards);
+
     //纯虚函数,用多态实现机器人和用户的不同处理方式
     virtual void prepareCallLord();
     virtual void preparePlayHand();
@@ -81,6 +84,10 @@ public:
 signals:
     //通知已经下注
     void notifyGrabLordBet(Player* player,int bet);
+    //通知已经出牌
+    void notifyPlayHand(Player* player,Cards& card);
+    // 通知已经发牌了
+    void notifyPickCards(Player* player, const Cards& cards);
 
 protected:
     int m_score;

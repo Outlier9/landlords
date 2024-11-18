@@ -6,6 +6,10 @@
 #include<cardpanel.h>
 #include<QLabel>
 #include<QMap>
+#include"animationwindow.h"
+#include "player.h"
+
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class GamePanel;
@@ -19,7 +23,7 @@ class GamePanel : public QMainWindow
 public:
     GamePanel(QWidget *parent = nullptr);
     ~GamePanel();
-
+    enum AnimationType{ShunZi, LianDui, Plane, JokerBomb, Bomb, Bet};
     //初始化游戏控制类函数
     void gameControlInit();
     //更新分数面板分数
@@ -44,17 +48,35 @@ public:
     void disposCard(Player* player,Cards cards);
     //更新扑克牌在窗口中的显示
     void updatePlayerCard(Player* player);
-
-
+    //加载玩家头像
+    QPixmap loadRoleImage(Player::Sex sex, Player::Direction direct, Player::Role role);
     //定时器的处理动作
     void onDispatchCard();
     //处理玩家状态的变化
     void onPlayerStatusChanged(Player* player,GameControl::PlayerStatus status);
     //处理玩家抢地主
     void onGrabLordBet(Player* player, int bet, bool );
+    // 处理玩家的出牌
+    void onDisposePlayHand(Player* player, Cards& cards);
+    // 处理玩家选牌
+    void onCardSelected(Qt::MouseButton button);
+    // 处理用户玩家出牌
+    void onUserPlayHand();
+    // 用户玩家放弃出牌
+    void onUserPass();
+
+    //显示特效动画
+    void showAnimation(AnimationType type,int bet = 0);
+    // 隐藏玩家打出的牌
+    void hidePlayerDropCards(Player* player);
+    // 显示玩家的最终得分
+    void showEndingScorePanel();
+    // 初始化闹钟倒计时
+    void initCountDown();
 
 protected:
     void paintEvent(QPaintEvent* ev);
+    void mouseMoveEvent(QMouseEvent* ev);
 
 private:
     enum CardAlign{Horizontal,Vertical};
@@ -93,5 +115,12 @@ private:
     QPoint m_baseCardPos;
     GameControl::GameStatus m_GameStatus;
     QTimer* m_timer;
+    Animationwindow* m_animation;
+    CardPanel* m_curSelCard;
+    QSet<CardPanel*> m_selectCards;
+    QRect m_cardsRect;
+    QHash<CardPanel*, QRect> m_userCards;
+    //CountDown* m_countDown;
+    // BGMControl* m_bgm;
 };
 #endif // GAMEPANEL_H
